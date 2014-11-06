@@ -11,6 +11,7 @@ public class Transaction {
 	
 	public final String ZERO_AMOUNT = "00000000"; // 8 zeros for zero amount
 	
+	
 
 	public Transaction (ArrayList<String> ma, String transaction) {
 		masterAccounts = ma;

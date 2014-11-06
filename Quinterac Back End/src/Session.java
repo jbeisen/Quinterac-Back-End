@@ -9,6 +9,11 @@ public class Session {
 	private static ArrayList<String> masterAccounts; // Array List for master accounts file
 	private static ArrayList<String> transactionSummary; // Array List for merged transaction summary file
 	
+	public final static String DEPOSIT_CODE = "01";
+	public final static String WITHDRAW_CODE = "02";
+	public final static String TRANSFER_CODE = "03";
+	public final static String CREATE_CODE = "04";
+	public final static String DELETE_CODE = "05";
 	
 	public Session() {
 		readMasterAccounts();
@@ -61,23 +66,25 @@ public class Session {
 		Transaction t;
 		
 		for (String transaction: transactionSummary) {
-			if (transaction.regionMatches(0, "01", 0, 2)) { // transaction is create
+			String transactionCode = transaction.substring(0, 1);
+			
+			if (transactionCode == "01") { // transaction is create
 				t = new Deposit(masterAccounts, transaction);
 				((Deposit) t).start();
 			}
-			else if (transaction.regionMatches(0, "02", 0, 2)) {
+			else if (transactionCode == "02") {
 				t = new Withdraw(masterAccounts, transaction);
 				((Withdraw) t).start();
 			}
-			else if (transaction.regionMatches(0, "03", 0, 2)) {
+			else if (transactionCode == "03") {
 				t = new Transfer(masterAccounts, transaction);
 				((Transfer) t).start();
 			}
-			else if (transaction.regionMatches(0, "04", 0, 2)) {
+			else if (transactionCode == "04") {
 				t = new Create(masterAccounts, transaction);
 				((Create) t).start();
 			}
-			else if (transaction.regionMatches(0, "05", 0, 2)) {
+			else if (transactionCode == "05") {
 				t = new Delete(masterAccounts, transaction);
 				((Delete) t).start();
 			}
