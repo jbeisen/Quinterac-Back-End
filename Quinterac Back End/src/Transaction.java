@@ -11,6 +11,14 @@ public class Transaction {
 	
 	public final String ZERO_AMOUNT = "00000000"; // 8 zeros for zero amount
 	
+	public final int TO_ACCOUNT_BEGIN_INDEX = 3;
+	public final int TO_ACCOUNT_END_INDEX = 8;
+	public final int FROM_ACCOUNT_BEGIN_INDEX = 10;
+	public final int FROM_ACCOUNT_END_INDEX = 15;
+	public final int AMOUNT_BEGIN_INDEX = 17;
+	public final int AMOUNT_END_INDEX = 24;
+	public final int NAME_BEGIN_INDEX = 26;
+	public final int NAME_END_INDEX = 40;
 	
 
 	public Transaction (ArrayList<String> ma, String transaction) {
@@ -20,10 +28,10 @@ public class Transaction {
 	
 	private void parseTransaction(String transaction) {
 		try{
-			toAccount = Integer.parseInt(transaction.substring(3, 8));
-			fromAccount = Integer.parseInt(transaction.substring(10,15));
-			amount = Integer.parseInt(transaction.substring(17,24));
-			name = transaction.substring(26,40);
+			toAccount = Integer.parseInt(transaction.substring(TO_ACCOUNT_BEGIN_INDEX, TO_ACCOUNT_END_INDEX + 1));
+			fromAccount = Integer.parseInt(transaction.substring(FROM_ACCOUNT_BEGIN_INDEX, FROM_ACCOUNT_END_INDEX + 1));
+			amount = Integer.parseInt(transaction.substring(AMOUNT_BEGIN_INDEX, AMOUNT_END_INDEX + 1));
+			name = transaction.substring(NAME_BEGIN_INDEX, NAME_END_INDEX + 1);
 			name = name.replaceAll("_", " ");
 			name = name.trim();
 		} catch (Exception e) {
