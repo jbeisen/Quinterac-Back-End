@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * With its single method apart from the constructor, it checks the relevant requirements
  * for a delete operation and then deletes the account from the master accounts file.
  * 
- * @author jonaheisen
+ * @author Jonah Eisen
  *
  */
 public class Delete extends Transaction {

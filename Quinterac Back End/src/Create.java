@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * accounts file based on the new account number and name specified in the
  * transaction summary file.
  * 
- * @author jonaheisen
+ * @author Jonah Eisen
  *
  */
 public class Create extends Transaction {

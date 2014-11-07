@@ -11,7 +11,7 @@ import java.util.Scanner;
  * This class contains the main loop of the system in which it asks the user for transaction codes.
  * It is instantiated upon start-up.
  * 
- * @author jonaheisen
+ * @author Jonah Eisen
  *
  */
 public class Session {

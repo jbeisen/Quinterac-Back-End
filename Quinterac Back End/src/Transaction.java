@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * The Transaction class is the parent class of all transactions.
  * It stores attributes and methods that apply to more than one transaction.
  * 
- * @author jonaheisen
+ * @author Jonah Eisen
  *
  */
 public class Transaction {
