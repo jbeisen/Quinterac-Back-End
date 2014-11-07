@@ -24,8 +24,16 @@ public class Create extends Transaction {
 	/**
 	 * This method performs the simple task of adding a new line to the master accounts file
 	 * containing the specified new account number, a balance of 0, and the specified name.
+	 * It first checks that the account does not already exist.
 	 */
 	public void start() {
+		for (String account: masterAccounts) {
+			if (extractAccountFromAccountLine(account) == getToAccount()) {
+				// account already exists
+				System.out.println("Error: Account already exists.");
+				return;
+			}
+		}
 		addToMasterAccounts(getPaddedNumber(getToAccount(), 6) + "_" + ZERO_AMOUNT + "_" + getPaddedName(getName()));
 	}
 }

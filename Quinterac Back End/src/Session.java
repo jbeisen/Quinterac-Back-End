@@ -1,9 +1,19 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
-
+/**
+ * This class contains the main loop of the system in which it asks the user for transaction codes.
+ * It is instantiated upon start-up.
+ * 
+ * @author jonaheisen
+ *
+ */
 public class Session {
 
 	private static ArrayList<String> masterAccounts; // Array List for master accounts file
@@ -15,16 +25,27 @@ public class Session {
 	public final static String CREATE_CODE = "04";
 	public final static String DELETE_CODE = "05";
 	
+	/**
+	 * This is the constructor for the Session class.
+	 * It simply invokes the method to read the two input files.
+	 */
 	public Session() {
-		readMasterAccounts();
-		transactionSummary = new ArrayList<>();
+		readFile(masterAccounts, "Master Accounts.txt");
+		readFile(transactionSummary, "Merged Transaction Summary.txt");
 	}
 	
-	private static void readMasterAccounts() {
-		String[] temp = getFile("Master Accounts.txt"); // returns String array of valid account lines
-		masterAccounts = new ArrayList<String>();
+	/**
+	 * This is a method that invokes the getFile method with the supplied file name,
+	 * and stores the result in the specified ArrayList of type String
+	 * 
+	 * @param internalList		the internal ArrayList to store the data
+	 * @param fileName			the name of the file to be read
+	 */
+	private static void readFile(ArrayList<String> internalList, String fileName) {
+		String[] temp = getFile(fileName); // returns String array of lines
+		internalList = new ArrayList<String>();
 		for (String s: temp) {
-			masterAccounts.add(s); // turns that into ArrayList of String
+			internalList.add(s); // turns that into ArrayList of Strings
 		}
 	}
 	
@@ -51,16 +72,52 @@ public class Session {
 		return data.toArray(new String[data.size()]);
 	}
 	
+	/**
+	 * This method sorts the master accounts file in ascending order and then
+	 * invokes the method to write it to the file.
+	 */
 	private static void writeMasterAccounts() {
-		// sort master accounts
-		// write them to file
+		Collections.sort(masterAccounts);
+		writeFile(masterAccounts, "New Master Accounts File.txt");
 	}
 	
+	/**
+	 * This method extracts all the account numbers from the master accounts file and
+	 * writes them to the new valid accounts file.
+	 */
 	private static void writeValidAccounts() {
-		// take account numbers from master accounts
-		// write them to file
+		ArrayList<String> validAccounts = new ArrayList<>();
+		for (String accountLine: masterAccounts) {
+			validAccounts.add(Integer.toString(Transaction.extractAccountFromAccountLine(accountLine)));
+		}
+		writeFile(validAccounts, "Valid Accounts.txt");
 	}
 	
+	/**
+	 * This method writes the specified ArrayList of type String to a file given the specified file name.
+	 */
+	private static void writeFile(ArrayList<String> internalList, String fileName) {
+		File ts = new File(fileName);
+	    try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(ts));
+			for (String s: internalList) {
+				writer.write(s + "\n");
+			}
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("Write operation failed.");
+			System.exit(1);
+		}
+
+	}
+	
+	/**
+	 * This method is the most central part of the system.
+	 * Herein lies the main loop that examines every line of the merged transaction
+	 * summary file and instantiates the appropriate Transaction. It passes that transaction
+	 * the master accounts file as well as the appropriate line from the transaction
+	 * summary file. It then triggers the performance of the that transaction.
+	 */
 	public void start() {
 		
 		Transaction t;

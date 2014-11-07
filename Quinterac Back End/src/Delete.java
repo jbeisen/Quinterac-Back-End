@@ -25,7 +25,7 @@ public class Delete extends Transaction {
 	 * checks that the proper requirements are made (name matching, amount zero), and deletes
 	 * the line from the master accounts file.
 	 */
-	public static void start() {
+	public void start() {
 		// find line in master accounts file
 		for (String account: masterAccounts) {
 			if (extractAccountFromAccountLine(account) == getToAccount()) {

@@ -1,14 +1,23 @@
 import java.util.ArrayList;
 
-
+/**
+ * The Transaction class is the parent class of all transactions.
+ * It stores attributes and methods that apply to more than one transaction.
+ * 
+ * @author jonaheisen
+ *
+ */
 public class Transaction {
 	
+	// class attributes:
 	protected static ArrayList<String> masterAccounts;
 	private static int toAccount;
 	private static int fromAccount;
 	private static int amount;
 	private static String name;
 	
+	
+	// constant declarations:
 	public final String ZERO_AMOUNT = "00000000"; // 8 zeros for zero amount
 	
 	public final int TO_ACCOUNT_BEGIN_INDEX = 3;
@@ -28,15 +37,25 @@ public class Transaction {
 	public final static int MA_NAME_END_INDEX = 30;
 
 
-
-	
-
+	/**
+	 * This is the constructor for the transaction file. It stores the master accounts file
+	 * as a class attribute and sends the transaction line off to the parseTransaction method.
+	 * 
+	 * @param ma			the ArrayList of the master accounts file
+	 * @param transaction	the String of a line in the transaction summary file
+	 */
 	public Transaction (ArrayList<String> ma, String transaction) {
 		masterAccounts = ma;
 		parseTransaction(transaction);
 	}
 	
-	
+	 /**
+	  * This method takes a line from the transaction summary file and parses out all the different fields.
+	  * In other words, it determines the accounts, amount, and name, and stores them as class
+	  * attributes so that the line only needs to be parsed once.
+	  * 
+	  * @param transaction		the String of the transaction line from the transaction summary file
+	  */
 	private void parseTransaction(String transaction) {
 		try{
 			toAccount = Integer.parseInt(transaction.substring(TO_ACCOUNT_BEGIN_INDEX, TO_ACCOUNT_END_INDEX + 1));
@@ -46,7 +65,7 @@ public class Transaction {
 			name = name.replaceAll("_", " ");
 			name = name.trim();
 		} catch (Exception e) {
-			System.out.println("Bad transaction summary input. System failure.");
+			System.out.println("Fatal Error: Bad transaction summary input.");
 			System.exit(1);
 		}
 	}
@@ -117,7 +136,7 @@ public class Transaction {
 	/**
 	 * This method extracts the account from an account line in the master accounts file.
 	 * 
-	 * @param accountLine	the specified lin eof the master accounts file
+	 * @param accountLine	the specified line of the master accounts file
 	 * @return				an int of the account
 	 */
 	public static int extractAccountFromAccountLine(String accountLine) {
