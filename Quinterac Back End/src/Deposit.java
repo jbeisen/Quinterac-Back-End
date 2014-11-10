@@ -7,10 +7,12 @@ public class Deposit extends Transaction{
 		super(ma, transaction);
 	}
 	
-	public static void start() {
+	public void start() {
 		for (String account: masterAccounts) {
-			if (account.substring(0, 5) == Integer.toString(getFromAccount())) {
-				
+			if (extractAccountFromAccountLine(account) == getToAccount()){
+				int newAmount = extractAmountFromAccountLine(account) + getAmount();
+				addToMasterAccounts(extractAccountFromAccountLine(account) + "_" + newAmount + "_" + extractNameFromAccountLine(account));
+				masterAccounts.remove(account);
 			}
 		}
 	}
