@@ -34,6 +34,7 @@ public class Create extends Transaction {
 				return;
 			}
 		}
-		addToMasterAccounts(getPaddedNumber(getToAccount(), 6) + "_" + ZERO_AMOUNT + "_" + getPaddedName(getName()));
+		addToMasterAccounts(getPaddedNumber(getToAccount(), ACCOUNT_LENGTH) 
+				+ "_" + ZERO_AMOUNT + "_" + getPaddedName(getName()));
 	}
 }

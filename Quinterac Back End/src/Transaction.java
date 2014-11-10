@@ -19,6 +19,8 @@ public class Transaction {
 	
 	// constant declarations:
 	public final String ZERO_AMOUNT = "00000000"; // 8 zeros for zero amount
+	public final static int ACCOUNT_LENGTH = 6; // 6 digits for an account
+	public final static int NAME_LENGTH = 15; // 15 characters for a name
 	
 	public final int TO_ACCOUNT_BEGIN_INDEX = 3;
 	public final int TO_ACCOUNT_END_INDEX = 8;
@@ -79,7 +81,7 @@ public class Transaction {
 	public static String getPaddedName(String name) {
 		String paddedName = new String(name);
 		paddedName = paddedName.replaceAll(" ", "_"); // replaces spaces with underscores
-		for (int i = name.length(); i < 15; i++ ) paddedName += "_";
+		for (int i = name.length(); i < NAME_LENGTH; i++ ) paddedName += "_";
 		return paddedName;
 	}
 	
