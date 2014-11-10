@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * The Create class implements the required behavior for the "delete" transaction.
+ * The Create class implements the required behavior for the "create" transaction.
  * With its single method apart from the constructor, adds a new line to the master
  * accounts file based on the new account number and name specified in the
  * transaction summary file.
