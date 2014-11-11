@@ -30,6 +30,8 @@ public class Session {
 	 * It simply invokes the method to read the two input files.
 	 */
 	public Session() {
+		masterAccounts = new ArrayList<String>();
+		transactionSummary = new ArrayList<String>();
 		readFile(masterAccounts, "Master Accounts.txt");
 		readFile(transactionSummary, "Merged Transaction Summary.txt");
 	}
@@ -43,7 +45,7 @@ public class Session {
 	 */
 	private static void readFile(ArrayList<String> internalList, String fileName) {
 		String[] temp = getFile(fileName); // returns String array of lines
-		internalList = new ArrayList<String>();
+		//internalList = new ArrayList<String>();
 		for (String s: temp) {
 			internalList.add(s); // turns that into ArrayList of Strings
 		}
@@ -120,28 +122,34 @@ public class Session {
 	 */
 	public void start() {
 		
+		
 		Transaction t;
 		
 		for (String transaction: transactionSummary) {
-			String transactionCode = transaction.substring(0, 1);
 			
-			if (transactionCode == "01") { // transaction is create
+			System.out.println(transaction);
+			
+			String transactionCode = transaction.substring(0, 2);
+			System.out.println(transactionCode);
+			
+			if (transactionCode.equals("01")) { // transaction is create
 				t = new Deposit(masterAccounts, transaction);
 				((Deposit) t).start();
 			}
-			else if (transactionCode == "02") {
+			else if (transactionCode.equals("02")) {
 				t = new Withdraw(masterAccounts, transaction);
 				((Withdraw) t).start();
 			}
-			else if (transactionCode == "03") {
+			else if (transactionCode.equals("03")) {
 				t = new Transfer(masterAccounts, transaction);
 				((Transfer) t).start();
 			}
-			else if (transactionCode == "04") {
+			else if (transactionCode.equals("04")) {
+				System.out.println("create read");
 				t = new Create(masterAccounts, transaction);
 				((Create) t).start();
 			}
-			else if (transactionCode == "05") {
+			else if (transactionCode.equals("05")) {
 				t = new Delete(masterAccounts, transaction);
 				((Delete) t).start();
 			}

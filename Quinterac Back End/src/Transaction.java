@@ -163,8 +163,8 @@ public class Transaction {
 	 */
 	public static String extractNameFromAccountLine(String accountLine) {
 		String temp = accountLine.substring(MA_NAME_BEGIN_INDEX, MA_NAME_END_INDEX + 1);
-		temp.replaceAll("_", " ");
-		temp.trim();
+		temp = temp.replaceAll("_", " ");
+		temp = temp.trim();
 		return temp;
 	}
 	

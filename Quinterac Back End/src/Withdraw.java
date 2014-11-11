@@ -29,9 +29,9 @@ public class Withdraw extends Transaction{
 	 * The new entry contains the original account number, the new balance after the deposit,
 	 * and the original name.
 	 */
-	public static void start() {
+	public void start() {
 		for (String account: masterAccounts) {
-			if (extractAccountFromAccountLine(account) == getFromAccount()){
+			if (Integer.toString(extractAccountFromAccountLine(account)).equals(getFromAccount())){
 				int newAmount = extractAmountFromAccountLine(account) + getAmount();
 				if (newAmount < 0){
 					// balance will be negative

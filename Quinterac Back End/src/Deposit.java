@@ -20,6 +20,7 @@ public class Deposit extends Transaction{
 	 */
 	public Deposit(ArrayList<String> ma, String transaction) {
 		super(ma, transaction);
+
 	}
 	
 	/**
@@ -29,11 +30,16 @@ public class Deposit extends Transaction{
 	 * and the original name.
 	 */
 	public void start() {
+
 		for (String account: masterAccounts) {
+			System.out.println("here");
+
 			if (extractAccountFromAccountLine(account) == getToAccount()){
+
 				int newAmount = extractAmountFromAccountLine(account) + getAmount();
 				addToMasterAccounts(extractAccountFromAccountLine(account) + "_" + newAmount + "_" + extractNameFromAccountLine(account));
 				masterAccounts.remove(account);
+				
 			}
 		}
 	}
