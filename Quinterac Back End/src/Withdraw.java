@@ -33,15 +33,11 @@ public class Withdraw extends Transaction{
 		for (String account: masterAccounts) {
 			if (Integer.toString(extractAccountFromAccountLine(account)).equals(Integer.toString(getFromAccount()))){
 				int newAmount = extractAmountFromAccountLine(account) - getAmount();
-				System.out.println(extractAmountFromAccountLine(account));
-				System.out.println(getAmount());
-				System.out.println(newAmount);
 				if (newAmount < 0){
 					// balance will be negative
 					System.out.println("Error: Blance will be negative after the withdrawl");
 					return;
 				}
-				System.out.println("Here.");
 				addToMasterAccounts(getPaddedNumber(extractAccountFromAccountLine(account), ACCOUNT_LENGTH) 
 						+ "_" + getPaddedNumber(newAmount,AMMOUNT_LENGTH) + "_" + getPaddedName(extractNameFromAccountLine(account)));
 				masterAccounts.remove(account);
