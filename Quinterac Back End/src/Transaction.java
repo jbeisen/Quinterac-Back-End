@@ -21,6 +21,7 @@ public class Transaction {
 	public final String ZERO_AMOUNT = "00000000"; // 8 zeros for zero amount
 	public final static int ACCOUNT_LENGTH = 6; // 6 digits for an account
 	public final static int NAME_LENGTH = 15; // 15 characters for a name
+	public final static int AMMOUNT_LENGTH = 8;
 	
 	public final int TO_ACCOUNT_BEGIN_INDEX = 3;
 	public final int TO_ACCOUNT_END_INDEX = 8;
@@ -152,7 +153,7 @@ public class Transaction {
 	 * @return				an int of the amount
 	 */
 	public static int extractAmountFromAccountLine(String accountLine) {
-		return Integer.parseInt(accountLine.substring(MA_AMOUNT_BEGIN_INDEX, MA_AMOUNT_BEGIN_INDEX + 1));
+		return Integer.parseInt(accountLine.substring(MA_AMOUNT_BEGIN_INDEX, MA_AMOUNT_END_INDEX + 1));
 	}
 	
 	/**

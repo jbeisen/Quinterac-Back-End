@@ -42,10 +42,8 @@ public class Delete extends Transaction {
 				}
 				else {
 					System.out.println("Error: Name does not match. Account not deleted.");
-
 				}
 			}
 		}
 	}
-
 }
