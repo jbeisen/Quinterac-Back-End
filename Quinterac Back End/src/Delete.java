@@ -30,7 +30,6 @@ public class Delete extends Transaction {
 		for (String account: masterAccounts) {
 			if (extractAccountFromAccountLine(account) == getToAccount()) {
 				// check that name matches:
-				System.out.println(extractNameFromAccountLine(account));
 				if (extractNameFromAccountLine(account).equals(getName())) {
 					// check that account balance is 0
 					if (extractAmountFromAccountLine(account) == 0) {

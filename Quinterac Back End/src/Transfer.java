@@ -13,6 +13,8 @@ import java.util.ArrayList;
  */
 public class Transfer extends Transaction{
 
+	private boolean fromAccountProcessed;
+	private boolean toAccountProcessed;
 	/**
 	 * This is the constructor for the Transfer class.
 	 * 
@@ -21,6 +23,8 @@ public class Transfer extends Transaction{
 	 */
 	public Transfer(ArrayList<String> ma, String transaction) {
 		super(ma, transaction);
+		fromAccountProcessed = false;
+		toAccountProcessed = false;
 	}
 
 	/**
@@ -37,7 +41,6 @@ public class Transfer extends Transaction{
 				if (newAmount < 0){
 					// balance will be negative
 					System.out.println("Error: Blance will be negative after the withdrawl");
-					return;
 				}
 				addToMasterAccounts(extractAccountFromAccountLine(account) + "_" + newAmount + "_" + extractNameFromAccountLine(account));
 				masterAccounts.remove(account);
@@ -45,6 +48,10 @@ public class Transfer extends Transaction{
 				int newAmount = extractAmountFromAccountLine(account) + getAmount();
 				addToMasterAccounts(extractAccountFromAccountLine(account) + "_" + newAmount + "_" + extractNameFromAccountLine(account));
 				masterAccounts.remove(account);
+			}
+			//If both accounts are processed, terminate the loop.
+			if (fromAccountProcessed && toAccountProcessed){
+				return;
 			}
 		}
 	}

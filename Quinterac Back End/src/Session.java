@@ -30,8 +30,10 @@ public class Session {
 	 * It simply invokes the method to read the two input files.
 	 */
 	public Session() {
+		//initializing masterAccounts and transactionSummary
 		masterAccounts = new ArrayList<String>();
 		transactionSummary = new ArrayList<String>();
+		//Read the masterAccounts and transactionSummary files.
 		readFile(masterAccounts, "Master Accounts.txt");
 		readFile(transactionSummary, "Merged Transaction Summary.txt");
 	}
@@ -45,7 +47,6 @@ public class Session {
 	 */
 	private static void readFile(ArrayList<String> internalList, String fileName) {
 		String[] temp = getFile(fileName); // returns String array of lines
-		//internalList = new ArrayList<String>();
 		for (String s: temp) {
 			internalList.add(s); // turns that into ArrayList of Strings
 		}
@@ -110,7 +111,6 @@ public class Session {
 			System.out.println("Write operation failed.");
 			System.exit(1);
 		}
-
 	}
 	
 	/**
@@ -121,18 +121,10 @@ public class Session {
 	 * summary file. It then triggers the performance of the that transaction.
 	 */
 	public void start() {
-		
-		
 		Transaction t;
-		
 		for (String transaction: transactionSummary) {
-			
-			System.out.println(transaction);
-			
 			String transactionCode = transaction.substring(0, 2);
-			System.out.println(transactionCode);
-			
-			if (transactionCode.equals("01")) { // transaction is create
+			if (transactionCode.equals("01")) {
 				t = new Deposit(masterAccounts, transaction);
 				((Deposit) t).start();
 			}
@@ -145,7 +137,6 @@ public class Session {
 				((Transfer) t).start();
 			}
 			else if (transactionCode.equals("04")) {
-				System.out.println("create read");
 				t = new Create(masterAccounts, transaction);
 				((Create) t).start();
 			}
@@ -156,9 +147,7 @@ public class Session {
 			else { // transaction code is "00" for end of session
 				// do nothing
 			}
-			
 		}
-		
 		writeMasterAccounts();
 		writeValidAccounts();
 	}

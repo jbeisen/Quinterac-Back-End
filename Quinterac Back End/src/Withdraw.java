@@ -40,6 +40,7 @@ public class Withdraw extends Transaction{
 				}
 				addToMasterAccounts(extractAccountFromAccountLine(account) + "_" + newAmount + "_" + extractNameFromAccountLine(account));
 				masterAccounts.remove(account);
+				return;
 			}
 		}
 	}

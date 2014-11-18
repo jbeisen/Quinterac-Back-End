@@ -32,16 +32,12 @@ public class Deposit extends Transaction{
 	public void start() {
 
 		for (String account: masterAccounts) {
-			System.out.println("here");
-
 			if (extractAccountFromAccountLine(account) == getToAccount()){
-
 				int newAmount = extractAmountFromAccountLine(account) + getAmount();
 				addToMasterAccounts(extractAccountFromAccountLine(account) + "_" + newAmount + "_" + extractNameFromAccountLine(account));
 				masterAccounts.remove(account);
-				
+				return;		
 			}
 		}
 	}
-
 }
